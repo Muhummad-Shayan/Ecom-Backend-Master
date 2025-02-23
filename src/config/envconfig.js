@@ -4,9 +4,10 @@ import server  from './server.js'
 
 dotenv.config()
 
- const config = {
+const config = {
     PORT : server.PORT,
-    MONGOURI : process.env.MONGODB_URI
+    MONGOURI : process.env.MONGODB_URI,
+    AUTH_SECRET: process.env.AUTH_SECRET 
 
 }
 
