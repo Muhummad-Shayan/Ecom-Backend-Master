@@ -86,7 +86,7 @@ const login = async (req,res)=>{
             
         }
     
-        const token = generateToken(user._id,user.email)
+        const token = generateToken(user._id,user.email,user.role)
 
         user.password = undefined
         
