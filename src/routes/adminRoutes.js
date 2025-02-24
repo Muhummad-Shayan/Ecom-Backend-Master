@@ -10,3 +10,6 @@ adminRouter.post('/upload-products',verifyToken,verifyAdmin,uploadMulter.fields(
     {name:'thumbnail',maxCount: 1},
     {name:'images',maxCount: 5}
 ]),createProduct)
+
+
+export {adminRouter}

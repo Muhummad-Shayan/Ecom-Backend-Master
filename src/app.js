@@ -3,6 +3,7 @@ import ConnectDB from './config/DB.js'
 import server from './config/server.js'
 import { authRouter } from './routes/authRoutes.js'
 import { userRouter } from './routes/userRoutes.js'
+import { adminRouter } from './routes/adminRoutes.js'
 
 
 const app = express()
@@ -12,6 +13,7 @@ ConnectDB()
 
 app.use('/auth',authRouter)
 app.use('/user',userRouter)
+app.use('/admin',adminRouter)
 
 
 

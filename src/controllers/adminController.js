@@ -1,19 +1,71 @@
+import { deleteLocalFiles } from "../helper/deleteFiles.js";
 import { sendResponse } from "../helper/response.js";
+import uploadToCloudinary from "../helper/uploadCloudinary.js";
+import Product from "../models/productSchema.js";
+import productValidationSchema from "../validations/productValidation.js";
+import fs from 'fs'
 
-const createProduct = async (req,res)=>{
+const createProduct = async (req, res) => {
     try {
-        console.log('shayan');
+        if (!req.files || Object.keys(req.files).length === 0) {
+            return sendResponse(400, res, null, "No files uploaded!");
+        }
+
+        const thumbnailPath = req.files.thumbnail?.[0]?.path;
+        const imagePaths = req.files.images ? req.files.images.map(file => file.path) : [];
+        let variations = [];
+        try {
+            variations = req.body.variations ? JSON.parse(req.body.variations) : [];
+            req.body.variations = variations
+        } catch (err) {
+            console.error("Invalid variations JSON", err);
+            return sendResponse(400, res, null, "Invalid variations format");
+        }
+        
+        const { error } = productValidationSchema.validate(req.body, { abortEarly: false });
+        if (error) {
+            deleteLocalFiles([thumbnailPath, ...imagePaths]);
+            return sendResponse(400, res, null, "Validation Failed", error.details);
+        }
+        
+        const uploadThumbnail = await uploadToCloudinary(thumbnailPath);
+        fs.unlinkSync(thumbnailPath); 
+
+        
+        let uploadedImages = [];
+        if (imagePaths.length > 0) {
+            for (let file of imagePaths) {
+                let uploadResult = await uploadToCloudinary(file);
+                uploadedImages.push(uploadResult);
+                fs.unlinkSync(file);
+            }
+        }
+
+        
         
 
+        const product = new Product({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            discountPrice: req.body.discountPrice || null,
+            stock: req.body.stock,
+            brand: req.body.brand,
+            gender: req.body.gender,
+            category: req.body.category,
+            subCategory: req.body.subCategory,
+            variations: variations,
+            thumbnail: uploadThumbnail,
+            images: uploadedImages,
+        });
+
+        await product.save();
+        return sendResponse(201, res, product, "Product uploaded successfully");
 
     } catch (error) {
-        console.error("Error in creating products",error);
-        sendResponse(500,res,null,"Internal Server Error",error.message)
-        
+        console.error("Error in creating product:", error);
+        return sendResponse(500, res, null, "Internal Server Error", error.message);
     }
-}
+};
 
-
-export {
-    createProduct
-}
+export { createProduct };

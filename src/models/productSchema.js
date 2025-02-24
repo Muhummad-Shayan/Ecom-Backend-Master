@@ -7,13 +7,14 @@ const productSchema = new mongoose.Schema({
     discountPrice: { type: Number },
     stock: { type: Number, required: true },
     brand: { type: String },
+    gender: { type: String, enum: ["Men", "Women", "Kids", ], required: true },
     category: { type: String, required: true },  // Main category
     subCategory: { type: String, required: true },  // First subcategory
     variations: [
       {
         color: String,
         size: String,  // Example: M, L, XL for clothes
-        stock: Number
+        
       }
     ],
     thumbnail: { type: String, required: true },
