@@ -4,11 +4,19 @@ const productSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
+    discountPrice: { type: Number },
     stock: { type: Number, required: true },
     brand: { type: String },
     category: { type: String, required: true },  // Main category
     subCategory: { type: String, required: true },  // First subcategory
-    innerSubCategory: { type: String },  // Second subcategory (optional)
+    variations: [
+      {
+        color: String,
+        size: String,  // Example: M, L, XL for clothes
+        stock: Number
+      }
+    ],
+    thumbnail: { type: String, required: true },
     images: [{ type: String, required: true }],
     ratings: { type: Number, default: 0 },
     reviews: [
