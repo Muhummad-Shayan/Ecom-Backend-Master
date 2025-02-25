@@ -95,4 +95,50 @@ const deleteProduct = async (req,res)=>{
     }
 }
 
-export { createProduct , deleteProduct};
+
+
+const updateProduct = async (req,res)=>{
+    try {
+        const productId = req.params.id
+
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            return sendResponse(400,res,null,"Invalid MongoDB Id")
+        }
+
+        const {name,description,price,discountPrice,stock,brand,gender,category,subCategory,variations , } = req.body
+
+        const updatepro = await Product.findByIdAndUpdate(
+            productId,
+            { 
+                $set:{
+                ...(name && {name}),
+                ...(description && {description}),
+                ...(price && {price}),
+                ...(discountPrice && {discountPrice}),
+                ...(stock && {stock}),
+                ...(brand && {brand}),
+                ...(gender && {gender}),
+                ...(category && {category}),
+                ...(subCategory && {subCategory}),
+                ...(variations && {variations}),
+                
+                
+                }
+            },
+            {new:true}
+        ) 
+        if (!updatepro) {
+            return sendResponse(404,res,null,"Product Not Found")
+        }
+
+        return sendResponse(201,res,updatepro,"Product Updated Successfully")
+
+        
+    } catch (error) {
+        console.error("Error in updating",error.message);
+        return sendResponse(500,res,null,"Internal Server Error",error.message)
+        
+    }
+}
+
+export { createProduct , deleteProduct , updateProduct};

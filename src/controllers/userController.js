@@ -43,7 +43,7 @@ const updateUserProfile = async (req,res)=>{
             return sendResponse(404, res, null, "User Not Found");
         }
 
-        return sendResponse(200,res,updatedUser,"User Updated Successfully")
+        return sendResponse(201,res,updatedUser,"User Updated Successfully")
 
     } catch (error) {
         console.error("error while updating user",error);
