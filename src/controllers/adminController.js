@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { deleteLocalFiles } from "../helper/deleteFiles.js";
 import { sendResponse } from "../helper/response.js";
 import uploadToCloudinary from "../helper/uploadCloudinary.js";
@@ -14,6 +15,7 @@ const createProduct = async (req, res) => {
         const thumbnailPath = req.files.thumbnail?.[0]?.path;
         const imagePaths = req.files.images ? req.files.images.map(file => file.path) : [];
         let variations = [];
+
         try {
             variations = req.body.variations ? JSON.parse(req.body.variations) : [];
             req.body.variations = variations
@@ -23,6 +25,7 @@ const createProduct = async (req, res) => {
         }
         
         const { error } = productValidationSchema.validate(req.body, { abortEarly: false });
+
         if (error) {
             deleteLocalFiles([thumbnailPath, ...imagePaths]);
             return sendResponse(400, res, null, "Validation Failed", error.details);
@@ -63,9 +66,33 @@ const createProduct = async (req, res) => {
         return sendResponse(201, res, product, "Product uploaded successfully");
 
     } catch (error) {
+
         console.error("Error in creating product:", error);
         return sendResponse(500, res, null, "Internal Server Error", error.message);
+        
     }
 };
 
-export { createProduct };
+
+const deleteProduct = async (req,res)=>{
+    try {
+        const id = req.params.id
+        
+        
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return sendResponse(400, res, null, "Invalid Product ID");
+        }
+        const product = await Product.findByIdAndDelete({_id:id})
+        if (!product) {
+            return sendResponse(404,res,null,"Product Not Found")
+        }
+        return sendResponse(202,res,product._id,"Product Delete Successfully By Id")
+        
+    } catch (error) {
+        console.error("Error in deleting product",error.message);
+        return sendResponse(500,res,null,"Internal Server Error",error.message)
+        
+    }
+}
+
+export { createProduct , deleteProduct};
