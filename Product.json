@@ -1,0 +1,113 @@
+[
+    {
+      "name": "Nike Air Zoom Pegasus",
+      "description": "Nike Air Zoom Pegasus lightweight running shoes are designed for both professional athletes and casual runners. They feature responsive cushioning technology that provides excellent energy return and shock absorption, reducing strain on your feet during long runs. The breathable mesh upper ensures ventilation, keeping your feet cool and comfortable, while the flexible rubber outsole provides superior grip on various surfaces. Perfect for daily workouts or casual wear, these shoes combine style, durability, and high-performance technology.",
+      "price": 8500,
+      "discountPrice": 7999,
+      "stock": 25,
+      "brand": "Nike",
+      "gender": "Men",
+      "category": "Footwear",
+      "subCategory": "Running Shoes",
+      "variations": [
+        { "color": "Grey", "size": "10" },
+        { "color": "Black", "size": "9" }
+      ],
+      "thumbnail": "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/air-zoom.avif",
+      "images": [
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/air-zoom-side.avif",
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/air-zoom-top.avif"
+      ],
+      "ratings": 0,
+      "reviews": []
+    },
+    {
+      "name": "Zara Cotton Hoodie",
+      "description": "This Zara cotton hoodie is designed for ultimate comfort and style, making it an essential wardrobe piece for all seasons. Crafted from high-quality organic cotton, it offers a soft and breathable feel, ensuring warmth during chilly days without feeling too heavy. The relaxed fit allows for easy layering, while the adjustable drawstring hood and ribbed cuffs provide a secure and stylish look. Whether you're heading out for a casual day or lounging at home, this hoodie is your go-to choice for effortless fashion.",
+      "price": 5000,
+      "discountPrice": 4599,
+      "stock": 50,
+      "brand": "Zara",
+      "gender": "Women",
+      "category": "Outerwear",
+      "subCategory": "Hoodies",
+      "variations": [
+        { "color": "Beige", "size": "M" },
+        { "color": "Black", "size": "L" }
+      ],
+      "thumbnail": "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/zara-hoodie.avif",
+      "images": [
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/zara-hoodie-front.avif",
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/zara-hoodie-back.avif"
+      ],
+      "ratings": 0,
+      "reviews": []
+    },
+    {
+      "name": "Kids Cartoon Sneakers",
+      "description": "These adorable kids' cartoon sneakers are perfect for little feet, providing comfort, support, and a fun look that children will love. Designed with a breathable mesh upper, these sneakers ensure proper air circulation to keep feet cool and dry throughout the day. The cushioned insole provides soft padding for all-day wear, and the flexible, non-slip rubber outsole offers enhanced grip for safe and stable movement. Featuring vibrant colors and cartoon-inspired designs, these sneakers make a great addition to your child’s wardrobe for school, play, and casual outings.",
+      "price": 3200,
+      "discountPrice": 2999,
+      "stock": 35,
+      "brand": "Reebok",
+      "gender": "Kids",
+      "category": "Footwear",
+      "subCategory": "Sneakers",
+      "variations": [
+        { "color": "Red", "size": "28" },
+        { "color": "Blue", "size": "30" }
+      ],
+      "thumbnail": "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/kids-sneakers.avif",
+      "images": [
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/kids-sneakers-side.avif",
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/kids-sneakers-top.avif"
+      ],
+      "ratings": 0,
+      "reviews": []
+    },
+    {
+      "name": "H&M Floral Dress",
+      "description": "The H&M floral dress is the perfect combination of elegance and comfort, designed to make you feel effortlessly stylish. Made from premium lightweight fabric, it features a flattering fit-and-flare silhouette that enhances your natural curves while ensuring ease of movement. The intricate floral print adds a touch of femininity, making it ideal for brunches, picnics, or casual outings. With short sleeves and a round neckline, this dress offers breathability and comfort, keeping you cool even on warm days. Pair it with your favorite sandals for a relaxed summer look or layer it with a jacket for a chic fall outfit.",
+      "price": 3800,
+      "discountPrice": 3499,
+      "stock": 45,
+      "brand": "H&M",
+      "gender": "Women",
+      "category": "Dresses",
+      "subCategory": "Casual Dresses",
+      "variations": [
+        { "color": "blue", "size": "S" },
+        { "color": "Yellow", "size": "M" }
+      ],
+      "thumbnail": "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/hm-dress.avif",
+      "images": [
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/hm-dress-front.avif",
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/hm-dress-back.avif"
+      ],
+      "ratings": 0,
+      "reviews": []
+    },
+    {
+      "name": "Men’s Leather Wallet",
+      "description": "Crafted from premium genuine leather, this men’s leather wallet is the perfect blend of sophistication and functionality. The sleek and durable design features multiple card slots, a dedicated cash compartment, and a secure coin pocket, making it ideal for organizing your essentials. The soft-touch leather gives it a luxurious feel while ensuring longevity. Compact yet spacious, this wallet is designed to fit comfortably in your pocket while keeping your cash and cards easily accessible. A must-have accessory for men who appreciate both style and practicality.",
+      "price": 2000,
+      "discountPrice": 1799,
+      "stock": 80,
+      "brand": "Tommy Hilfiger",
+      "gender": "Men",
+      "category": "Accessories",
+      "subCategory": "Wallets",
+      "variations": [
+        { "color": "Brown", "size": "One Size" },
+        { "color": "Black", "size": "One Size" }
+      ],
+      "thumbnail": "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/leather-wallet.avif",
+      "images": [
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/leather-wallet-open.avif",
+        "https://res.cloudinary.com/dfxido6sm/image/upload/v1740597029/ecommerce/leather-wallet-closed.avif"
+      ],
+      "ratings": 0,
+      "reviews": []
+    }
+  ]
+  
