@@ -144,25 +144,8 @@ const updateProduct = async (req,res)=>{
 
 
 
-const getSingleProduct = async (req,res)=>{
-    try {
-        
-        const productId = req.params.productId
-
-        if (!productId || !mongoose.Types.ObjectId.isValid(productId)) return sendResponse(400,res,null,"Plz Send Product Id To Fetch")
-
-        const singleProduct = await Product.findOne({_id:productId})
-
-        return sendResponse(200,res,singleProduct,"Single Product Fetch Successfully")
-
-    } catch (error) {
-        console.error("Error in fetching single product",error.message);
-        sendResponse(500,res,null,"Internal Server Error",error.message)
-    }
-}
 
 
 
 
-
-export { createProduct , deleteProduct , updateProduct , getSingleProduct};
+export { createProduct , deleteProduct , updateProduct };
