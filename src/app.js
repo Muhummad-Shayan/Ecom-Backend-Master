@@ -13,7 +13,7 @@ ConnectDB()
 
 app.use('/auth',authRouter)
 app.use('/user',userRouter)
-app.use('/admin',productRouter)
+app.use('/product',productRouter)
 
 
 
