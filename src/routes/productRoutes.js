@@ -7,26 +7,25 @@ import { getAllProducts, getProductsByCategory, getProductsCategoryListByGender,
 
 const productRouter = express.Router()
 
-productRouter.post('/upload-product',verifyToken,verifyAdmin,uploadMulter.fields([
-    {name:'thumbnail',maxCount: 1},
-    {name:'images',maxCount: 5}
-]),createProduct)
+productRouter.post('/upload', verifyToken, verifyAdmin, uploadMulter.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'images', maxCount: 5 }
+]), createProduct);
 
+productRouter.delete('/remove/:id', verifyToken, verifyAdmin, deleteProduct);
 
-productRouter.delete('/delete-product/:id',verifyToken,verifyAdmin,deleteProduct)
+productRouter.put('/update/:id', verifyToken, verifyAdmin, updateProduct);
 
-productRouter.put('/update-product/:id',verifyToken,verifyAdmin,updateProduct)
+productRouter.get('/details/:productId', getSingleProduct);
 
-productRouter.get('/detail/:productId',getSingleProduct)
+productRouter.get('/categories/:gender', getProductsCategoryListByGender);
 
-productRouter.get('/category-list/:gender',getProductsCategoryListByGender)
+productRouter.get('/search', handleSearchProducts);
 
-productRouter.get('/search',handleSearchProducts)
+productRouter.get('/category/:category', getProductsByCategory);
 
-productRouter.get('/category/:category',getProductsByCategory)
+productRouter.get('/all', getAllProducts);
 
-
-productRouter.get('',getAllProducts)
 
 
 export {productRouter}
