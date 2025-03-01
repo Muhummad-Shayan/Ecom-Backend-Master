@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { sendResponse } from "../helper/response.js"
 import Product from "../models/productSchema.js"
-import { fetchAllProductsFromMongoDb, fetchCtegoryListByGenderFromMongoDB } from "../utils/fetchDataFromMongoDb.js"
+import { fetchAllProductsFromMongoDb, fetchCategoryListByGenderFromMongoDB, fetchProductsByCategoryFromMongoDb } from "../utils/fetchDataFromMongoDb.js"
 
 const getSingleProduct = async (req,res)=>{
     try {
@@ -42,7 +42,7 @@ const getProductsCategoryListByGender = async (req,res)=>{
         const gender = req.params.gender
         if (!gender) return sendResponse(400,res,null,"Plz give a gender to fetch product")
 
-        const CategoriesListByGender = await fetchCtegoryListByGenderFromMongoDB(gender)
+        const CategoriesListByGender = await fetchCategoryListByGenderFromMongoDB(gender)
         
         return sendResponse(200,res,{CategoriesListByGender},)
 
@@ -54,7 +54,24 @@ const getProductsCategoryListByGender = async (req,res)=>{
 
 
 
+const getProductsByCategory = async (req,res)=>{
+    try {
+
+        const category = req.params.category
+        const filter = req.query
+        const categoryProducts = await fetchProductsByCategoryFromMongoDb(category,filter)
+
+        sendResponse(200,res,categoryProducts,"Category Products Fetched Successfully")
+        
+    } catch (error) {
+        console.error("Error While Fetching products by category",error.message);
+        sendResponse(500,res,null,"Internal Server Error",error.message)
+        
+    }
+}
 
 
 
-export {getSingleProduct, getAllProducts,getProductsCategoryListByGender}
+
+
+export {getSingleProduct, getAllProducts,getProductsCategoryListByGender,getProductsByCategory}

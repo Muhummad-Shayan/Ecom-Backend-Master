@@ -22,7 +22,7 @@ const fetchAllProductsFromMongoDb = async (filter)=>{
 }
 
 
-const fetchCtegoryListByGenderFromMongoDB = async (gender)=>{
+const fetchCategoryListByGenderFromMongoDB = async (gender)=>{
     try {
         
 
@@ -48,7 +48,42 @@ const fetchCtegoryListByGenderFromMongoDB = async (gender)=>{
     }
 }
 
+const fetchProductsByCategoryFromMongoDb = async (category,filter)=>{
+    try {
+        const {price,brand,gender} = filter
+        
+        const query = {}
+        if (price) query.price = {$lte:Number(price)}
+        if (gender) query.gender = { $regex: `^${gender}$`, $options: "i" };
+        if (brand) query.brand = {$regex:brand,$options:"i"}
+        
+        
+        const matchFilter = {subCategory:{ $regex: `^${category}$`, $options: "i" }}
+        const categoryProducts = await Product.aggregate([
+            {$match:{...matchFilter,...query}},
+            
+            {
+                $group:{
+                    _id:"$subCategory",
+                    TotalProducts:{$sum:1},
+                    Products: {$push:'$$ROOT'}
+                }
+            }
+        ])
+
+        return categoryProducts
+
+    } catch (error) {
+        throw new Error("Error in fetchProductsByCategoryFromMongoDb",error.message);
+        
+    }
+}
 
 
 
-export {fetchCtegoryListByGenderFromMongoDB,fetchAllProductsFromMongoDb}
+
+export {
+    fetchCategoryListByGenderFromMongoDB ,
+    fetchAllProductsFromMongoDb,
+    fetchProductsByCategoryFromMongoDb
+}

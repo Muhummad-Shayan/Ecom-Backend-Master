@@ -3,7 +3,7 @@ import { verifyToken } from '../middleware/verifyToken.js'
 import { verifyAdmin } from '../middleware/verifyAdmin.js'
 import { uploadMulter } from '../middleware/multer.js'
 import { createProduct, deleteProduct, updateProduct } from '../controllers/productController.js'
-import { getAllProducts, getProductsCategoryListByGender, getSingleProduct } from '../controllers/readProductController.js'
+import { getAllProducts, getProductsByCategory, getProductsCategoryListByGender, getSingleProduct } from '../controllers/readProductController.js'
 
 const productRouter = express.Router()
 
@@ -21,6 +21,7 @@ productRouter.get('/:productId',getSingleProduct)
 
 productRouter.get('/category-list/:gender',getProductsCategoryListByGender)
 
+productRouter.get('/category/:category',getProductsByCategory)
 
 productRouter.get('',getAllProducts)
 
