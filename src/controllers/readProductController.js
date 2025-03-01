@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { sendResponse } from "../helper/response.js"
 import Product from "../models/productSchema.js"
-import { fetchAllProductsFromMongoDb, fetchCategoryListByGenderFromMongoDB, fetchProductsByCategoryFromMongoDb } from "../utils/fetchDataFromMongoDb.js"
+import { fetchAllProductsFromMongoDb, fetchCategoryListByGenderFromMongoDB, fetchProductsByCategoryFromMongoDb, fetchProductsBySearchKeyFromMongoDb } from "../utils/fetchDataFromMongoDb.js"
 
 const getSingleProduct = async (req,res)=>{
     try {
@@ -70,8 +70,24 @@ const getProductsByCategory = async (req,res)=>{
     }
 }
 
+const handleSearchProducts = async (req,res)=>{
+    try {
+        
+        const {q} = req.query
+        
+        
+        const searchProducts = await fetchProductsBySearchKeyFromMongoDb(q)
+
+        return sendResponse(200,res,searchProducts,"Product Fetched Successfully")
+
+    } catch (error) {
+        console.error("Error while handling search",error.message);
+        return sendResponse(500,res,null,"Internal Server Error",error.message)
+        
+    }
+}
 
 
 
 
-export {getSingleProduct, getAllProducts,getProductsCategoryListByGender,getProductsByCategory}
+export {getSingleProduct, getAllProducts,getProductsCategoryListByGender,getProductsByCategory,handleSearchProducts}

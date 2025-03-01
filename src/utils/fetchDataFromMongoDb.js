@@ -80,10 +80,35 @@ const fetchProductsByCategoryFromMongoDb = async (category,filter)=>{
 }
 
 
+const fetchProductsBySearchKeyFromMongoDb = async (searchKey)=>{
+    try {
+        
+        const searchProducts = await Product.aggregate([
+            {
+                $search:{
+                    index: "search",
+                    text:{
+                        query:searchKey,
+                        path:["name","brand","gender","category","subCategory"]
+                    },
+                    
+                }
+            },
+            
+        ])
+
+        return searchProducts
+
+    } catch (error) {
+        throw new Error("Error while handling search functionality",error.message);
+        
+    }
+}
 
 
 export {
     fetchCategoryListByGenderFromMongoDB ,
     fetchAllProductsFromMongoDb,
-    fetchProductsByCategoryFromMongoDb
+    fetchProductsByCategoryFromMongoDb,
+    fetchProductsBySearchKeyFromMongoDb
 }
