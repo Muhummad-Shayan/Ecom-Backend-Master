@@ -28,4 +28,4 @@ productRouter.get('/all', getAllProducts);
 
 
 
-export {productRouter}
+export default productRouter;

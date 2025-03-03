@@ -7,4 +7,4 @@ const userRouter = express.Router()
 userRouter.get('/profile',verifyToken,getUserProfile)
 userRouter.put('/update',verifyToken,updateUserProfile)
 
-export { userRouter}
+export default userRouter
