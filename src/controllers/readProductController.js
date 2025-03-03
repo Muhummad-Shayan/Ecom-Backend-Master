@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { sendResponse } from "../helper/response.js"
 import Product from "../models/productSchema.js"
-import { fetchAllProductsFromMongoDb, fetchCategoryListByGenderFromMongoDB, fetchProductsByCategoryFromMongoDb, fetchProductsBySearchKeyFromMongoDb } from "../utils/fetchDataFromMongoDb.js"
+import { fetchAllProductsFromMongoDb, fetchCategoryListByGenderFromMongoDB, fetchProductsByCategoryFromMongoDb, fetchProductsBySearchKeyFromMongoDb } from "../utils/readProductFunctionality.js"
 
 const getSingleProduct = async (req,res)=>{
     try {
