@@ -52,9 +52,24 @@ const updateUserProfile = async (req,res)=>{
     }
 }
 
+const getAllUsers = async (req,res)=>{
+    try {
+        
+        const allUsers = await User.find({})
+        const totalUsers = allUsers.length
+        return sendResponse(200,res,{TotalUser: totalUsers, allUsers},"All Users Fetched Successfully")
+
+    } catch (error) {
+        console.error("error in fetching all users",error);
+        return sendResponse(500,res,null,"Internal Server Error",error.message)
+        
+    }
+}
+
 
 export{
     getUserProfile,
-    updateUserProfile
+    updateUserProfile,
+    getAllUsers
 }
 
