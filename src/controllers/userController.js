@@ -1,19 +1,15 @@
 import { sendResponse } from "../helper/response.js";
 import User from "../models/userSchema.js";
+import { getUserProfileById, updateUserById } from "../utils/UserFunctionality.js";
 
 const getUserProfile = async (req,res)=>{
     try {
 
         const userId = req.user.id 
-        const user = await User.findOne({_id:userId}).select('-password')
+        
+        const userDetail = await getUserProfileById(userId)
 
-        if (!user) {
-            console.error("User Not Found");
-            return sendResponse(404,res,null,"User Not Found")
-            
-        }
-
-        return sendResponse(200,res,user,"User Fetched Successfully")
+        return sendResponse(200,res,userDetail,"User Profile Fetched Successfully")
         
     } catch (error) {
         console.error("error in fetching user",error);
@@ -24,24 +20,10 @@ const getUserProfile = async (req,res)=>{
 
 const updateUserProfile = async (req,res)=>{
     try {
-        const {name, email, address, contact} = req.body;
+        
         const userId = req.user.id
 
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            {
-            $set:{
-                ...(name && {name}),
-                ...(email && {email}),
-                ...(address && {address}),
-                ...(contact && {contact}),}
-            },
-                { new: true} 
-        ).select("-password") 
-        
-        if (!updatedUser) {
-            return sendResponse(404, res, null, "User Not Found");
-        }
+        const updatedUser = await updateUserById(userId,req.body)
 
         return sendResponse(201,res,updatedUser,"User Updated Successfully")
 
