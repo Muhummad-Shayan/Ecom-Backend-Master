@@ -1,5 +1,5 @@
 import express  from 'express';
-import { getAllOrders, getMyOrders, orderProduct } from '../controllers/OrderController.js';
+import { getAllOrders, getMyOrders, orderProduct, updateOrder } from '../controllers/OrderController.js';
 
 import { verifyAdmin } from '../middleware/verifyAdmin.js';
 import { verifyToken } from '../middleware/verifyToken.js';
@@ -11,6 +11,8 @@ OrderRouter.post('/create',verifyToken,orderProduct)
 OrderRouter.get('/all',verifyToken,verifyAdmin,getAllOrders)
 
 OrderRouter.get('/myorders',verifyToken,getMyOrders)
+
+OrderRouter.put('/update/:id',verifyToken,verifyAdmin,updateOrder)
 
 
 

@@ -33,4 +33,13 @@ const orderValidationSchema = Joi.object({
     orderNotes: Joi.string().allow("").optional(),
 });
 
-export default orderValidationSchema;
+const adminUpdateOrderSchema = Joi.object({
+    status: Joi.string().valid("Pending", "Processing", "Shipped", "Delivered", "Cancelled").required(),
+    paymentStatus: Joi.string().valid("Pending", "Paid", "Failed").optional(),
+    deliveryDate: Joi.date().optional(),
+}).min(1); 
+
+
+
+export  {orderValidationSchema, adminUpdateOrderSchema};
+
