@@ -1,6 +1,6 @@
 import uploadToCloudinary from "../helper/uploadCloudinary.js";
 import fs from 'fs'
-import Product from "../models/productSchema";
+import Product from "../models/productSchema.js";
 import { deleteLocalFiles } from "../helper/deleteFiles.js";
 
 const uploadProduct = async (productDetail,variations,imagePaths,thumbnail,) => {
