@@ -5,10 +5,11 @@ import bcrypt from 'bcrypt'
 import config from "../config/envconfig.js";
 import { loginSchema, signupSchema } from "../validations/authValidation.js";
 import { generateToken } from "../helper/jwtHelpers.js";
+import { signUpUser } from "../utils/authFunctionality.js";
 
 const signup = async (req,res) =>{
     try {
-        const {name,email,password} = req.body
+        const {email} = req.body
         const {error} = signupSchema.validate(req.body)
         
         if (error) {
@@ -18,29 +19,11 @@ const signup = async (req,res) =>{
 
         const user = await User.findOne({email})
         if (user) {
-            
-            return sendResponse(400,res,null,"User already exist, try another email")
-            
+            return sendResponse(400,res,null,"User already exist, try another email") 
         }
         
+        const newUser = signUpUser(req.body)
         
-        const hashPassword = await bcrypt.hash(password , 10)
-
-
-        const newUser = new User({
-            name:name,
-            email : email,
-            password : hashPassword,
-            contact: "",
-            address:""
-
-        })
-        
-        await newUser.save()
-
-        
-        newUser.password = undefined
-
         sendResponse(201,res,newUser,"User Signup Successfully")
         console.info("user",newUser);
         
@@ -67,9 +50,7 @@ const login = async (req,res)=>{
             sendResponse(400,res,null,error.details[0].message)
             return
         }
-        
         const user = await User.findOne({email})
-        
         if (!user) {
             return sendResponse(400,res,null,"user is not exist")
             
@@ -90,11 +71,7 @@ const login = async (req,res)=>{
 
         user.password = undefined
         
-        
-        console.info("user logged in successfully",user.email);
         return sendResponse(200,res,{user,token:token},"user login successfully")
-
-        
 
         
     } catch (error) {

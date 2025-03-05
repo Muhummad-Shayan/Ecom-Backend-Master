@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 import { deleteLocalFiles } from "../helper/deleteFiles.js";
 import { sendResponse } from "../helper/response.js";
-import uploadToCloudinary from "../helper/uploadCloudinary.js";
 import Product from "../models/productSchema.js";
 import productValidationSchema from "../validations/productValidation.js";
-import fs from 'fs'
+import { updateProductById, uploadProduct } from "../utils/productFunctionality.js";
 
 const createProduct = async (req, res) => {
     try {
@@ -31,38 +30,8 @@ const createProduct = async (req, res) => {
             return sendResponse(400, res, null, "Validation Failed", error.details);
         }
         
-        const uploadThumbnail = await uploadToCloudinary(thumbnailPath);
-        fs.unlinkSync(thumbnailPath); 
+        const product = await uploadProduct(req.body,variations,imagePaths,thumbnailPath)
 
-        
-        let uploadedImages = [];
-        if (imagePaths.length > 0) {
-            for (let file of imagePaths) {
-                let uploadResult = await uploadToCloudinary(file);
-                uploadedImages.push(uploadResult);
-                fs.unlinkSync(file);
-            }
-        }
-
-        
-        
-
-        const product = new Product({
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-            discountPrice: req.body.discountPrice || null,
-            stock: req.body.stock,
-            brand: req.body.brand,
-            gender: req.body.gender,
-            category: req.body.category,
-            subCategory: req.body.subCategory,
-            variations: variations,
-            thumbnail: uploadThumbnail,
-            images: uploadedImages,
-        });
-
-        await product.save();
         return sendResponse(201, res, product, "Product uploaded successfully");
 
     } catch (error) {
@@ -76,7 +45,7 @@ const createProduct = async (req, res) => {
 
 const deleteProduct = async (req,res)=>{
     try {
-        const id = req.params.id
+        const {id} = req.params
         
         
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -104,29 +73,9 @@ const updateProduct = async (req,res)=>{
         if (!mongoose.Types.ObjectId.isValid(productId)) {
             return sendResponse(400,res,null,"Invalid MongoDB Id")
         }
-
-        const {name,description,price,discountPrice,stock,brand,gender,category,subCategory,variations , } = req.body
-
-        const updatepro = await Product.findByIdAndUpdate(
-            productId,
-            { 
-                $set:{
-                ...(name && {name}),
-                ...(description && {description}),
-                ...(price && {price}),
-                ...(discountPrice && {discountPrice}),
-                ...(stock && {stock}),
-                ...(brand && {brand}),
-                ...(gender && {gender}),
-                ...(category && {category}),
-                ...(subCategory && {subCategory}),
-                ...(variations && {variations}),
-                
-                
-                }
-            },
-            {new:true}
-        ) 
+        
+        const updatepro = await updateProductById(productId,req.body)
+        
         if (!updatepro) {
             return sendResponse(404,res,null,"Product Not Found")
         }
