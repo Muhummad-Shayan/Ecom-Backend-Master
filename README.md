@@ -128,5 +128,6 @@ Contributions are welcome! Feel free to fork this repo and submit a PR.
 ---
 
 ## 🤝 Contact
-📧 Email: [mdshayan5909@gmail.com](mailto:mdshayan5909@gmail.com)  
+📧 Email: [mdshayan590@gmail.com](mailto:mdshayan590@gmail.com)  
 🔗 GitHub: [shaya-141](https://github.com/shaya-141)  
+   linkdin : [shayan](www.linkedin.com/in/muhummadshayan)
