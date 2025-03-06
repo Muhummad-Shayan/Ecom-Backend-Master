@@ -108,9 +108,9 @@ npm start  # or nodemon for development mode
 
 ---
 
-## 📝 Logging & Error Handling
+## 📝 Logging 
 ✅ **Winston & Morgan** for logging requests and errors  
-✅ **Custom error handler middleware** for clean error responses  
+
 
 ---
 
