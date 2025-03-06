@@ -6,6 +6,8 @@
 ![JWT](https://img.shields.io/badge/JWT-Authentication-orange?style=for-the-badge&logo=jsonwebtokens)
 ![Multer](https://img.shields.io/badge/Multer-File%20Uploads-red?style=for-the-badge)
 ![Helmet](https://img.shields.io/badge/Security-Helmet-yellow?style=for-the-badge)
+![Winston](https://img.shields.io/badge/Winston-000000?style=for-the-badge)
+![Morgan](https://img.shields.io/badge/Morgan-FF5733?style=for-the-badge)
 
 ## 📌 Overview
 This is a **full-fledged E-commerce backend** built using **Node.js, Express.js, and MongoDB**. It includes authentication, product management, order processing, and security features.
